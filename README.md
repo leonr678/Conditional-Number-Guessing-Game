@@ -20,3 +20,8 @@ All libraries are included with Python:
 
 We make use of GUI, error handling, randomization, input validation, and conditional logic.
 The game is contained in a class called ConditionalNumberGuessing, which contains many methods that control different aspects of the game, such as check_guess() which determines whether the user's guess matches the target number. Our game is event-driven, meaning the flow of execution is determined by the user input.
+
+# Future improvements
+
+- ***More developed GUI***
+- ***More mathematical conditions*** 
