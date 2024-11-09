@@ -135,8 +135,7 @@ class ConditionalNumberGuessing:  # The game is contained in this class
                 self.entry.delete(0, tk.END)
                 self.reset_game()
             self.guess_counter += 1
-            self.guess_label.config(text=f"Guess: {self.guess_counter}/5")
-            #self.guess_label.pack()    
+            self.guess_label.config(text=f"Guess: {self.guess_counter}/5")    
         except ValueError:
                 self.sub_label.config(text="Not a valid number")
                 
