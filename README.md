@@ -11,7 +11,7 @@ You will have 5 attempts before Game Over.
 
 All libraries are included with Python:
 
-- ***TKinter (GUI)***
+- ***Tkinter (GUI)***
 - ***Random***
 - ***Math***  
 
