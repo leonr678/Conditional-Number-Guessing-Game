@@ -52,18 +52,19 @@ class ConditionalNumberGuessing:  # The game is contained in this class
 
     def easy_number_picker(self, x):
         if x == 0:
-            self.target_num = random.randint(1, 10)
+            self.target_num = random.randint(1, 9)
         elif x == 1:
-            self.target_num = random.randint(15, 30)    
+            self.target_num = random.randint(16, 30)    
         elif 1 < x < 7:
             self.target_num = random.randint(1, math.floor(30/x)) * x   # Multiple of x between 1 and 30
         elif x == 7:
-            self.target_num = random.randint(20, 30)    
+            self.target_num = random.randint(21, 30)    
 
     def medium_game(self):
         self.easy_button.pack_forget()
         self.medium_button.pack_forget()
         self.hard_button.pack_forget()
+        self.guess_label.config(text=f"Guess: {self.guess_counter}/5")
         self.guess_label.pack()
         self.sub_label.config(text="")
         self.medium_condition_counter = (self.medium_condition_counter + 1) % len(medium_conditions)
@@ -77,18 +78,19 @@ class ConditionalNumberGuessing:  # The game is contained in this class
 
     def medium_number_picker(self, x):
         if x == 0:
-            self.target_num = random.randint(1, 18)
+            self.target_num = random.randint(1, 17)
         elif x == 1:
-            self.target_num = random.randint(29, 50)    
+            self.target_num = random.randint(30, 50)    
         elif 1 < x < 7:
             self.target_num = random.randint(1, math.floor(50/x)) * x   # Multiple of x between 1 and 50
         elif x == 7:
-            self.target_num = random.randint(38, 50)    
+            self.target_num = random.randint(39, 50)    
 
     def hard_game(self):
         self.easy_button.pack_forget()
         self.medium_button.pack_forget()
         self.hard_button.pack_forget()
+        self.guess_label.config(text=f"Guess: {self.guess_counter}/3")
         self.guess_label.pack()
         self.sub_label.config(text="")
         self.hard_condition_counter = (self.hard_condition_counter + 1) % len(hard_conditions)
@@ -102,13 +104,13 @@ class ConditionalNumberGuessing:  # The game is contained in this class
 
     def hard_number_picker(self, x):
         if x == 0:
-            self.target_num = random.randint(1, 29)
+            self.target_num = random.randint(1, 28)
         elif x == 1:
-            self.target_num = random.randint(64, 100)    
+            self.target_num = random.randint(65, 100)    
         elif 1 < x < 7:
             self.target_num = random.randint(1, math.floor(100/x)) * x   # Multiple of x between 1 and 100
         elif x == 7:
-            self.target_num = random.randint(77, 100)    
+            self.target_num = random.randint(78, 100)    
 
 
 
@@ -118,13 +120,13 @@ class ConditionalNumberGuessing:  # The game is contained in this class
             if guess < 1 or guess > self.max_num:
                 self.sub_label.config(text="Number is not in range, try again!")
                 self.entry.delete(0, tk.END)
-                if self.guess_counter == 5:
+                if (self.guess_counter == 5 and self.max_num < 100) or (self.guess_counter == 3 and self.max_num == 100):
                     messagebox.showinfo(title="Tough luck!", message=f"Ran out of guesses!!! The number was {self.target_num}.")
                     self.reset_game()
             elif guess != self.target_num:
                 self.sub_label.config(text="Incorrect, try again!")
                 self.entry.delete(0, tk.END)
-                if self.guess_counter == 5:
+                if (self.guess_counter == 5 and self.max_num < 100) or (self.guess_counter == 3 and self.max_num == 100):
                     messagebox.showinfo(title="Tough luck!",message=f"Ran out of guesses!!! The number was {self.target_num}.")
                     self.reset_game()
             else:
@@ -135,7 +137,10 @@ class ConditionalNumberGuessing:  # The game is contained in this class
                 self.entry.delete(0, tk.END)
                 self.reset_game()
             self.guess_counter += 1
-            self.guess_label.config(text=f"Guess: {self.guess_counter}/5")    
+            if self.max_num < 100:
+                self.guess_label.config(text=f"Guess: {self.guess_counter}/5")
+            else:
+                self.guess_label.config(text=f"Guess: {self.guess_counter}/3")   
         except ValueError:
                 self.sub_label.config(text="Not a valid number")
                 
